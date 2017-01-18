@@ -10,9 +10,8 @@
 
 
 
-Markup :  `code()`
-   
-    Markup : ```javascript
+`code()`
+```javascript
          ```
 
 
