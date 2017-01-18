@@ -1,7 +1,7 @@
 # Segmentation code
 
 ## Table of Contents
-* **[Tutorials / Courses](#tutorials-and-courses)** 
+* **[Tutorials / Courses](#Shell-script)** 
 
 * **[Bash scripts](#Shell-script)**
 * **[GMM based training (main)](#main.cpp)**
@@ -25,7 +25,7 @@ mkdir -p output
 ./docSeg testF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
 
 ~~~~
-### Tutorials and Courses
+### Shell script
 
 * [Deep Learning for Computer Vision](https://www.youtube.com/watch?v=qgx57X0fBdA)  by Rob Fergus, NIPS 2013 tutorial.
 * [Convolutional Neural Networks for Visual Recognition](http://vision.stanford.edu/teaching/cs231n/syllabus.html) by Fei-Fei Li, Andrej Karpathy and Justin Johnson, 2016. [Stanford]
