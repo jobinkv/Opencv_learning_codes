@@ -228,3 +228,109 @@ Mat gmmGrtest(Mat image,string model,Classifier deep)
 
 
 ```
+### SVM in functionmai.cpp
+#### Training
+``` c++
+void TrainTheModel(string org_folder,string gt_folder, char *model_name)
+{
+                ThreeMatstr finalFet;
+                Mat initial(256,1,CV_32F,Scalar(0));
+        //cout<<"text size = "<<initial.size()<<endl;
+                finalFet.background = initial.clone();
+                finalFet.figure         = initial.clone();
+                finalFet.text           = initial.clone();
+
+                vector<string> files = vector<string>();
+                getdir(org_folder,files);
+//      final feture list
+                Mat final_lst;
+                //cout<<"testt= "<<files.size()<<endl;
+                for (unsigned int i = 0;i < files.size();i++)
+                {
+                        // if (i==1)// looop for sample run
+                        //      break;
+                        string gt_path =  gt_folder + string("/") + files[i] ;
+                        string org_path = org_folder + string("/") + files[i] ;
+
+                        Mat image, gt_img;
+                        image = imread(org_path, CV_LOAD_IMAGE_COLOR);   // Reading original image
+                        gt_img = imread(gt_path, CV_LOAD_IMAGE_COLOR);   // Reading gt image
+                        //--------------------------------------------------------------------
+                        resize(gt_img, gt_img, image.size(), INTER_NEAREST);
+                        Mat enerfyMinSplit[3];
+                        split(gt_img, enerfyMinSplit);
+                        for (int j=0;j<3;j++)
+                                threshold(enerfyMinSplit[j],enerfyMinSplit[j],125,255,THRESH_BINARY);
+                        merge(enerfyMinSplit,3,gt_img);
+                        imwrite(gt_path,gt_img);
+                        continue;
+
+                        //--------------------------------------------------------------------
+                        if( gt_img.cols != image.cols or gt_img.rows != image.rows )
+                        {
+                                cout <<"ERROr : Image dimentios of the given images "<<files[i]<<" are not matching" << endl;
+                                continue;
+                        }
+                        cout<<"Now running "<<files[i]<<endl;
+                        Rect imageprp(p_size,0,image.cols,image.rows);
+                        Mat locbp = makeLbpImg(image);
+                        Mat listofpatch = patchpos(imageprp);
+                        ThreeMatstr train_feture = crtTrainFet(listofpatch,locbp,gt_img);
+
+                // concatinating the out put features
+                        hconcat(finalFet.text,train_feture.text,finalFet.text);
+                        hconcat(finalFet.figure,train_feture.figure,finalFet.figure);
+                        hconcat(finalFet.background,train_feture.background,finalFet.background);
+                }
+                // ThreeMatstr clean_feture = cleanFet(finalFet);
+                ThreeMatstr clean_feture = finalFet;
+                int maxx = maximum(clean_feture.text.cols,clean_feture.figure.cols,clean_feture.background.cols);
+                cout<<"maximum val= "<<maxx<<endl;
+                cout<<"text size= "<<clean_feture.text.cols<<endl;
+                cout<<"figure size= "<<clean_feture.figure.cols<<endl;
+                cout<<"background size= "<<clean_feture.background.cols<<endl;
+                Mat trainData;
+                hconcat(clean_feture.text,clean_feture.figure,trainData);
+                hconcat(trainData,clean_feture.background,trainData);
+        // making of labels
+                Mat labels;
+                Mat lab_text(clean_feture.text.cols,1,CV_32F,Scalar(0));
+                Mat lab_figure(clean_feture.figure.cols,1,CV_32F,Scalar(1));
+                Mat lab_background(clean_feture.background.cols,1,CV_32F,Scalar(2));
+                vconcat(lab_text,lab_figure,labels);
+                vconcat(labels,lab_background,labels);
+                trainData = trainData.t();
+                Mat R = Mat(1, 3, CV_32FC1);
+                R.at<float>(0,0)=1;
+                R.at<float>(0,1)=1;
+                R.at<float>(0,2)=1;
+                cout<< "R vector"<<R<<endl;
+                CvMat weights = R;
+                CvSVMParams  param = CvSVMParams();
+                param.svm_type = CvSVM::C_SVC;
+                param.kernel_type = CvSVM::RBF;
+                param.degree = 0; // for  poly
+                param.gamma = 20; // for poly/rbf/sigmoid
+                param.coef0 = 0; // for  poly/sigmoid
+                param.C = 7; // for CV_SVM_C_SVC , CV_SVM_EPS_SVR  and  CV_SVM_NU_SVR
+                param.nu = 0.0; // for  CV_SVM_NU_SVC, CV_SVM_ONE_CLASS , and  CV_SVM_NU_SVR
+                param.p = 0.0; // for CV_SVM_EPS_SVR
+                param.class_weights = &weights;//[(.6, 0.3,0.1);//NULL;//for CV_SVM_C_SVC
+                param.term_crit.type = CV_TERMCRIT_ITER;         //| CV_TERMCRIT_EPS;
+                param.term_crit.max_iter = 1000;
+                param.term_crit.epsilon = 1e-6;
+                CvParamGrid gammaGrid=CvSVM::get_default_grid(CvSVM::GAMMA);
+                CvParamGrid pGrid;
+                CvParamGrid nuGrid,degreeGrid;
+                //gammaGrid.step=0;
+                cout << "Starting training process" << endl;
+                cout<<"trainData= "<<trainData.rows<<endl;
+                CvSVM svm;
+                svm.train_auto(trainData, labels, Mat(), Mat(),param, 4,
+                        CvSVM::get_default_grid(CvSVM::C), gammaGrid, pGrid, nuGrid, CvSVM::get_default_grid(CvSVM::COEF), degreeGrid, true);
+                svm.save(model_name);
+
+                cout << "Finished training process" << endl;
+}
+
+```
