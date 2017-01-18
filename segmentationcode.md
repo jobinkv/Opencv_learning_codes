@@ -21,20 +21,20 @@
 
 
 ### Run.sh 
-```
+~~~~
 #!/bin/bash
 make
 ./docSeg gmmGbrTr "/users/jobinkv/threeClassTrainData/newTrain" "/users/jobinkv/threeClassTrainData/newtrGt" tdeepfet.xml
 mkdir -p output
 ./docSeg gmmGrTestF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
-```
+~~~~
 #### SVM based training
-``` bash
+~~~~ bash
 ./docSeg train "/users/jobinkv/threeClassTrainData/newTrain" "/users/jobinkv/threeClassTrainData/newtrGt" tdeepfet.xml
 mkdir -p output
 ./docSeg testF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
 
-```
+~~~~
 ### main.cpp
 ``` c++
         else if(mode =="gmmGbrTr")// main train funcrion ------------------------------================================
