@@ -1,3 +1,24 @@
+
+# Index
+## [Bash scripts](### Run.sh )
+## [GMM based training (main)](### main.cpp)
+## [GMM based training (function)](### functionmain.cpp (GMM Train and test))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Run.sh 
 ```
 #!/bin/bash
@@ -10,7 +31,7 @@ mkdir -p output
 ``` bash
 ./docSeg train "/users/jobinkv/threeClassTrainData/newTrain" "/users/jobinkv/threeClassTrainData/newtrGt" tdeepfet.xml
 mkdir -p output
-./docSeg gmmGrTestF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
+./docSeg testF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
 
 ```
 ### main.cpp
@@ -55,7 +76,7 @@ mkdir -p output
 
         }
 ```
-### functionmain.cpp
+### functionmain.cpp (GMM Train and test)
 
 ``` c++
 void TrainGmmGbrModel(string org_folder,string gt_folder,string model)// dealing wi th afolder
@@ -235,7 +256,7 @@ Mat gmmGrtest(Mat image,string model,Classifier deep)
 
 
 ```
-### SVM in functionmai.cpp
+### SVM in functionmain.cpp
 #### Training
 ``` c++
 void TrainTheModel(string org_folder,string gt_folder, char *model_name)
