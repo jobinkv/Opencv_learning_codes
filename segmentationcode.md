@@ -7,7 +7,7 @@ mkdir -p output
 ./docSeg gmmGrTestF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
 ```
 ### main.cpp
-```
+``` c++
         else if(mode =="gmmGbrTr")// main train funcrion ------------------------------================================
         {
                 cout<<"training started"<<endl;
