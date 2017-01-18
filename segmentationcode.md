@@ -7,7 +7,7 @@
 
 
 
-## Shell script
+### Shell script
 #### SVM based training
 ~~~~ bash
 #!/bin/bash
