@@ -21,7 +21,7 @@
 
 
 ### Run.sh 
-~~~~
+~~~~ bash
 #!/bin/bash
 make
 ./docSeg gmmGbrTr "/users/jobinkv/threeClassTrainData/newTrain" "/users/jobinkv/threeClassTrainData/newtrGt" tdeepfet.xml
