@@ -17,5 +17,5 @@ mkdir -p output
 ./docSeg gmmGrTestF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
 ```
 
-[The main code](https://github.com/jobinkv/Opencv_learning_codes/blob/master/L2Normalization.cpp#L3-L10)
+[The main code](Opencv_learning_codes/blob/master/L2Normalization.cpp#L3-L10)
 
