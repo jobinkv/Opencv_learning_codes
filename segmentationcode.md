@@ -1,6 +1,8 @@
 # Segmentation code
 
 ## Table of Contents
+* **[Tutorials / Courses](#tutorials-and-courses)** 
+
 * **[Bash scripts](#Shell-script)**
 * **[GMM based training (main)](#main.cpp)**
 * **[GMM based training (function)](#functionmain.cpp (GMM Train and test))**
@@ -23,6 +25,12 @@ mkdir -p output
 ./docSeg testF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
 
 ~~~~
+### Tutorials and Courses
+
+* [Deep Learning for Computer Vision](https://www.youtube.com/watch?v=qgx57X0fBdA)  by Rob Fergus, NIPS 2013 tutorial.
+* [Convolutional Neural Networks for Visual Recognition](http://vision.stanford.edu/teaching/cs231n/syllabus.html) by Fei-Fei Li, Andrej Karpathy and Justin Johnson, 2016. [Stanford]
+* [Deep Learning for Natural Language Processing](http://cs224d.stanford.edu/) by Richard Socher. [Stanford]
+
 ### main.cpp
 ``` c++
         else if(mode =="gmmGbrTr")// main train funcrion ------------------------------================================
