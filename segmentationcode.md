@@ -6,7 +6,7 @@
 * **[GMM based training (function)](#functionmain.cpp (GMM Train and test))**
 
 
-
+ [Named Link](http://www.google.fr/) and http://www.google.fr/ or <http://example.com/>
 
 First Header  | Second Header
 ------------- | -------------
