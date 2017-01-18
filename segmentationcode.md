@@ -334,7 +334,7 @@ void TrainTheModel(string org_folder,string gt_folder, char *model_name)
 }
 
 ```
-### svm train in functionmain.cpp
+### svm test in functionmain.cpp
 ``` c++
 Mat crtTestFet(Mat& image, char *model_readed)
 {
