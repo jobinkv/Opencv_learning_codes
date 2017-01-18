@@ -6,6 +6,13 @@ make
 mkdir -p output
 ./docSeg gmmGrTestF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
 ```
+#### SVM based training
+``` bash
+./docSeg train "/users/jobinkv/threeClassTrainData/newTrain" "/users/jobinkv/threeClassTrainData/newtrGt" tdeepfet.xml
+mkdir -p output
+./docSeg gmmGrTestF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
+
+```
 ### main.cpp
 ``` c++
         else if(mode =="gmmGbrTr")// main train funcrion ------------------------------================================
@@ -336,6 +343,31 @@ void TrainTheModel(string org_folder,string gt_folder, char *model_name)
 ```
 ### svm test in functionmain.cpp
 ``` c++
+Mat docLayotSeg(Mat image, char *model_readed)
+{
+
+        Mat enerfyMin;
+        Mat outImage = crtTestFet(image, model_readed);
+//////////////////////// Alpha expansion //////////////////////
+        int num_labels = 3;
+        int lambada=.45*255;
+        Mat downSmp;
+        resize(outImage, downSmp, Size(),(double)1/p_size, (double)1/p_size, INTER_NEAREST);
+                // smoothness and data costs are set up one by one, individually
+        enerfyMin = GridGraph_Individually(num_labels,downSmp,lambada);
+        // resize as the size of the original image
+        resize(enerfyMin, enerfyMin, image.size(), INTER_NEAREST);
+        Mat enerfyMinSplit[3];
+        split(enerfyMin, enerfyMinSplit);
+        for (int i=0;i<3;i++)
+                threshold(enerfyMinSplit[i],enerfyMinSplit[i],125,255,THRESH_BINARY);
+        merge(enerfyMinSplit,3,enerfyMin);
+        return enerfyMin;
+
+}
+
+
+
 Mat crtTestFet(Mat& image, char *model_readed)
 {
 
