@@ -122,6 +122,108 @@ void TrainGmmGbrModel(string org_folder,string gt_folder,string model)// dealing
 
 }
 
+Mat gmmGrtest(Mat image,string model,Classifier deep)
+{
+        Mat gray;
+        cvtColor(image,gray,CV_RGB2GRAY);
+        // declairing feature extraction class
+        fetExtrct meth1;
+        // setting input image
+        meth1.setInpImage(image);
+
+        ///gaburFet
+        if (feturE==1)
+                meth1.gaburFet ();
+
+        // lbp fet
+        if (feturE==2)
+                meth1.lbpFet();
+
+        // cc features
+        if (feturE==3)
+                meth1.ccFet ();
+
+
+        //::google::InitGoogleLogging("./docSeg");
+        //string model_file   = "deploy.prototxt";
+        //string trained_file = "bvlc_reference_caffenet.caffemodel";
+        //string mean_file    = "imagenet_mean.binaryproto";
+        //string label_file   = "synset_words.txt";
+        //Classifier classifier(model_file, trained_file, mean_file, label_file);
+
+        // take the list of patches
+        Mat listofpatch = meth1.listOfpatch();
+
+        Mat outImage(image.rows,image.cols, CV_8UC3, Scalar(0,0,0));
+
+
+        EM gmmText;// = allModel.text;
+        EM gmmGraph;// = allModel.figure;
+        EM gmmBacK;// =  allModel.background;
+        // reading attempt
+        //string model ("model.xml");
+        //==============================
+        string modTxt ("text_");
+        string fulname = modTxt+model;
+        gmmText = readModel(fulname);
+        //=============================
+        string modGra ("gra_");
+        fulname = modGra+model;
+        gmmGraph = readModel(fulname);
+        //===========================
+        string modbac ("bac_");
+        fulname = modbac+model;
+        gmmBacK = readModel(fulname);
+
+        Mat hist;
+
+        for (int i=0;i<listofpatch.rows;i++)//
+        {
+                Rect ross(listofpatch.at<float>(i,2),listofpatch.at<float>(i,1),p_size,p_size);
+                if (feturE==1)
+                hist = meth1.features(ross);// gabour
+                else if (feturE==2)
+                hist = meth1.lbpftr(ross); //lbp features
+                else if (feturE==3)
+                hist = meth1.ccftrXtr(ross); //cc ftr
+                else if (feturE==4){
+                Mat patch = gray(ross).clone();
+                hist = deep.Classify(patch);
+                }
+                double txt = gmmRealPred( gmmText,L2Normalization( hist));
+                double graP = gmmRealPred( gmmGraph, L2Normalization(hist));
+                double bac = gmmRealPred( gmmBacK, L2Normalization(hist));
+                rectangle(outImage, ross, Scalar((int)(txt),(int)(graP),(int)(bac)), -1, 8, 0 );
+        }
+        // clear model
+        meth1.clrAll();
+        Mat enerfyMin;
+//////////////////////// Alpha expansion //////////////////////
+        int num_labels = 3;
+        int lambada=.45*255;
+        Mat downSmp;
+        resize(outImage, downSmp, Size(),(double)1/p_size, (double)1/p_size, INTER_NEAREST);
+                // smoothness and data costs are set up one by one, individually
+        //namedWindow( "Display window", WINDOW_NORMAL );// Create a window for display.
+        //imshow( "Display window", outImage ); 
+        //waitKey(0);   
+        //clock_t tStart = clock();
+        //enerfyMin = rectPrior1(outImage);     
+        //printf("Time taken for rectPrior1: %.2fs\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);
+        //enerfyMin = segmentRectPrior(outImage);       
+        enerfyMin = GridGraph_Individually(num_labels,downSmp,lambada);
+        // resize as the size of the original image
+        //namedWindow( "Display window1", WINDOW_NORMAL );// Create a window for display.
+        //imshow( "Display window1", enerfyMin ); 
+        //waitKey(0); 
+        resize(enerfyMin, enerfyMin, image.size(), INTER_NEAREST);
+        Mat enerfyMinSplit[3];
+        split(enerfyMin, enerfyMinSplit);
+        for (int i=0;i<3;i++)
+                threshold(enerfyMinSplit[i],enerfyMinSplit[i],125,255,THRESH_BINARY);
+        merge(enerfyMinSplit,3,enerfyMin);
+        return enerfyMin;
+}
 
 
 
