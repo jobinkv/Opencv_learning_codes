@@ -1,9 +1,9 @@
 # Segmentation code
 
 ## Table of Contents
-* **[Bash scripts](### Run.sh )**
-* **[GMM based training (main)](### main.cpp)**
-* **[GMM based training (function)](### functionmain.cpp (GMM Train and test))**
+* **[Bash scripts](#Run.sh )**
+* **[GMM based training (main)](#main.cpp)**
+* **[GMM based training (function)](#functionmain.cpp (GMM Train and test))**
 
 
 
