@@ -48,7 +48,7 @@ mkdir -p output
 
         }
 ```
-### function.cpp
+### functionmain.cpp
 
 ``` c++
 void TrainGmmGbrModel(string org_folder,string gt_folder,string model)// dealing wi th afolder
