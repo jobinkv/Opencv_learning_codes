@@ -2,7 +2,7 @@
 
 
 ## Table of Contents
-* **[How to run](#How-to-run)** 
+* **[How to run](#how-to-run)** 
 
 
 
