@@ -1,45 +1,13 @@
 # Segmentation code
 
 ## Table of Contents
-* **[Bash scripts](#Run.sh )**
+* **[Bash scripts](#Shell-script)**
 * **[GMM based training (main)](#main.cpp)**
 * **[GMM based training (function)](#functionmain.cpp (GMM Train and test))**
 
 
- [Named Link](http://www.google.fr/) and http://www.google.fr/ or <http://example.com/>
 
-First Header  | Second Header
-------------- | -------------
-Content Cell  | Content Cell
-Content Cell  | Content Cell
-
- `code()`
-    var specificLanguage_code = 
-    {
-        "data": {
-            "lookedUpPlatform": 1,
-            "query": "Kasabian+Test+Transmission",
-            "lookedUpItem": {
-                "name": "Test Transmission",
-                "artist": "Kasabian",
-                "album": "Kasabian",
-                "picture": null,
-                "link": "http://open.spotify.com/track/5jhJur5n4fasblLSCOcrTp"
-            }
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-## Run.sh 
+## Shell script
 #### SVM based training
 ~~~~ bash
 #!/bin/bash
