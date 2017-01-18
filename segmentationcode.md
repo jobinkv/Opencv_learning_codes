@@ -20,7 +20,8 @@
 
 
 
-### Run.sh 
+## Run.sh 
+#### SVM based training
 ~~~~ bash
 #!/bin/bash
 make
