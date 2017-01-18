@@ -292,8 +292,8 @@ void TrainTheModel(string org_folder,string gt_folder, char *model_name)
                         for (int j=0;j<3;j++)
                                 threshold(enerfyMinSplit[j],enerfyMinSplit[j],125,255,THRESH_BINARY);
                         merge(enerfyMinSplit,3,gt_img);
-                        imwrite(gt_path,gt_img);
-                        continue;
+                        //imwrite(gt_path,gt_img);
+                        //continue;
 
                         //--------------------------------------------------------------------
                         if( gt_img.cols != image.cols or gt_img.rows != image.rows )
