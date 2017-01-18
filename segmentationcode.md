@@ -334,3 +334,52 @@ void TrainTheModel(string org_folder,string gt_folder, char *model_name)
 }
 
 ```
+### svm train in functionmain.cpp
+``` c++
+Mat crtTestFet(Mat& image, char *model_readed)
+{
+
+        Mat locbp = makeLbpImg(image);
+        // calling patch listing function---
+        Rect imageprp(p_size,0,image.cols,image.rows);
+        Mat listofpatch = patchpos(imageprp);
+
+        Mat outImage(locbp.rows,locbp.cols, CV_8UC3, Scalar(0,0,0));
+    /// Establish the number of bins
+        int histSize = 256;
+        float range[] = { 0, 256 } ; //the upper boundary is exclusive
+        const float* histRange = { range };
+        Mat hist;
+        bool uniform = true; bool accumulate = false;
+        Mat patch;
+        int psiz = listofpatch.at<float>(1,2)-listofpatch.at<float>(0,2);
+        //cout<<"====="<<psiz<<endl;
+        CvSVM svm;
+        svm.load(model_readed);
+        for (int i=0;i<listofpatch.rows;i++)//
+        {
+
+                Rect ross(listofpatch.at<float>(i,2),listofpatch.at<float>(i,1),psiz,psiz);
+                // Rect ross(listofpatch.at<float>(i,2),listofpatch.at<float>(i,1),psiz,psiz);
+                //cout<<"====="<<ross<<", i= "<<i<<endl;
+                patch= locbp(ross);
+                // calculating histogram
+                calcHist( &patch, 1, 0, Mat(),hist, 1, &histSize, &histRange, uniform, accumulate);
+                //hist = hist/(psiz*psiz);
+                //hconcat(outFeture.feature,hist,outFeture.feature);
+                float response = svm.predict(hist);
+                if (response==0)
+                        rectangle(outImage, ross, Scalar(255,0,0), -1, 8, 0 );
+                if (response==1)
+                        rectangle(outImage, ross, Scalar(0,255,0), -1, 8, 0 );
+                if (response==2)
+                        rectangle(outImage, ross, Scalar(0,0,255), -1, 8, 0 );
+
+                //cout<<"predicted values = "<<response<<endl;
+                //hconcat(outFeture.rectBox,ross,outFeture.rectBox);
+        }
+
+        return outImage;
+}
+
+```
