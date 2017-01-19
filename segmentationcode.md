@@ -2,14 +2,14 @@
 
 ## Table of Contents
 * **[Shell script](#shell-script)** 
-
+* **[GMM based functions in main file](#gmm-based-functions-in-main-file)
 * **[Bash scripts](#Shell-script)**
 * **[GMM based training (main)](#main.cpp)**
 * **[GMM based training (function)](#functionmain.cpp (GMM Train and test))**
 
 
 ## Shell script
-#### SVM based training
+#### GMM based training
 ~~~~ bash
 #!/bin/bash
 make
@@ -26,7 +26,7 @@ mkdir -p output
 ~~~~
 
 
-### main.cpp
+### GMM based functions in main file
 ``` c++
         else if(mode =="gmmGbrTr")// main train funcrion ------------------------------================================
         {
