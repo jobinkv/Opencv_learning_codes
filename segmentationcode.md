@@ -6,8 +6,8 @@
 * **[SVM based function in main file](#svm-based-function-in-main-file)**
 * **[GMM training](#gmm-training)**
 * **[GMM testing](#gmm-testing)**
-* **[SVM training](#gmm-training)**
-* **[SVM testing](#gmm-testing)**
+* **[SVM training](#svm-training)**
+* **[SVM testing](#svm-testing)**
 
 
 ## Shell script
