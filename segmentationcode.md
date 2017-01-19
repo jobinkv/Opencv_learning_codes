@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * **[Shell script](#shell-script)** 
-* **[GMM based functions in main file](#gmm-based-functions-in-main-file)
+* **[GMM based functions in main file](#gmm-based-functions-in-main-file)**
 * **[Bash scripts](#Shell-script)**
 * **[GMM based training (main)](#main.cpp)**
 * **[GMM based training (function)](#functionmain.cpp (GMM Train and test))**
