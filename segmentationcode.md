@@ -4,31 +4,32 @@
 * **[Shell script](#shell-script)** 
 * **[GMM based functions in main file](#gmm-based-functions-in-main-file)**
 * **[SVM based function in main file](#svm-based-function-in-main-file)**
-* **[Bash scripts](#Shell-script)**
-* **[GMM based training (main)](#main.cpp)**
-* **[GMM based training (function)](#functionmain.cpp (GMM Train and test))**
+* **[GMM training](#gmm-training)**
+* **[GMM testing](#gmm-testing)**
+* **[SVM training](#gmm-training)**
+* **[SVM training](#gmm-testing)**
 
 
 ## Shell script
 #### GMM based training
-~~~~ bash
+``` bash
 #!/bin/bash
 make
 ./docSeg gmmGbrTr "/users/jobinkv/threeClassTrainData/newTrain" "/users/jobinkv/threeClassTrainData/newtrGt" tdeepfet.xml
 mkdir -p output
 ./docSeg gmmGrTestF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
-~~~~
+```
 #### SVM based training
-~~~~ bash
+``` bash
 ./docSeg train "/users/jobinkv/threeClassTrainData/newTrain" "/users/jobinkv/threeClassTrainData/newtrGt" tdeepfet.xml
 mkdir -p output
 ./docSeg testF "/users/jobinkv/threeClassTrainData/testImg" "./output" tdeepfet.xml
 
-~~~~
-
+```
+[Return to main menu](#table-of-contents)
 
 ### GMM based functions in main file 
-[Return to main menu](#table-of-contents)
+
 ``` c++
         else if(mode =="gmmGbrTr")// main train funcrion ------------------------------================================
         {
@@ -70,8 +71,9 @@ mkdir -p output
 
         }
 ```
-### SVM based function in main file 
 [Return to main menu](#table-of-contents)
+
+### SVM based function in main file 
 ``` c++
         else if(mode =="train")
         {
@@ -90,7 +92,8 @@ mkdir -p output
         evaluateOutput(outFolder,gtFolder, resultFileName);
         }
 ```
-### functionmain.cpp (GMM Train and test)
+[Return to main menu](#table-of-contents)
+### GMM training 
 
 ``` c++
 void TrainGmmGbrModel(string org_folder,string gt_folder,string model)// dealing wi th afolder
@@ -163,7 +166,10 @@ void TrainGmmGbrModel(string org_folder,string gt_folder,string model)// dealing
                 gmmSave(gmm_backgnd,fulname);
 
 }
-
+```
+[Return to main menu](#table-of-contents)
+### GMM testing
+```c++
 Mat gmmGrtest(Mat image,string model,Classifier deep)
 {
         Mat gray;
@@ -270,8 +276,8 @@ Mat gmmGrtest(Mat image,string model,Classifier deep)
 
 
 ```
-### SVM in functionmain.cpp
-#### Training
+[Return to main menu](#table-of-contents)
+### SVM training
 ``` c++
 void TrainTheModel(string org_folder,string gt_folder, char *model_name)
 {
@@ -376,7 +382,8 @@ void TrainTheModel(string org_folder,string gt_folder, char *model_name)
 }
 
 ```
-### svm test in functionmain.cpp
+[Return to main menu](#table-of-contents)
+### SVM testing
 ``` c++
 Mat docLayotSeg(Mat image, char *model_readed)
 {
