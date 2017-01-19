@@ -91,6 +91,7 @@ mkdir -p output
         char* resultFileName = argv[4];
         evaluateOutput(outFolder,gtFolder, resultFileName);
         }
+
 ```
 [Return to main menu](#table-of-contents)
 ### GMM training 
