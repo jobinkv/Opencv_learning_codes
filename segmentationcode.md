@@ -27,7 +27,7 @@ mkdir -p output
 ~~~~
 
 
-### GMM based functions in main file
+### GMM based functions in main file [Return to main menu](#table-of-contents)
 ``` c++
         else if(mode =="gmmGbrTr")// main train funcrion ------------------------------================================
         {
@@ -69,7 +69,7 @@ mkdir -p output
 
         }
 ```
-### SVM based function in main file
+### SVM based function in main file [Return to main menu](#table-of-contents)
 ``` c++
         else if(mode =="train")
         {
