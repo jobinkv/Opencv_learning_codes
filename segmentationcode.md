@@ -7,7 +7,7 @@
 * **[GMM training](#gmm-training)**
 * **[GMM testing](#gmm-testing)**
 * **[SVM training](#gmm-training)**
-* **[SVM training](#gmm-testing)**
+* **[SVM testing](#gmm-testing)**
 
 
 ## Shell script
