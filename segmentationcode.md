@@ -3,6 +3,7 @@
 ## Table of Contents
 * **[Shell script](#shell-script)** 
 * **[GMM based functions in main file](#gmm-based-functions-in-main-file)**
+* **[SVM based function in main file](#svm-based-function-in-main-file)**
 * **[Bash scripts](#Shell-script)**
 * **[GMM based training (main)](#main.cpp)**
 * **[GMM based training (function)](#functionmain.cpp (GMM Train and test))**
@@ -67,6 +68,19 @@ mkdir -p output
                 }
 
         }
+```
+### SVM based function in main file
+``` c++
+        else if(mode =="train")
+        {
+                cout<<"training  started"<<endl;
+                string org_folder = string(argv[2]);
+                string gt_folder = string(argv[3]);
+                char* model_name =  argv[4];
+                // it will create a classifier.xml file
+                TrainTheModel(org_folder,gt_folder, model_name);
+        }
+
 ```
 ### functionmain.cpp (GMM Train and test)
 
