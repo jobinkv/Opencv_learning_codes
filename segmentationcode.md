@@ -82,7 +82,13 @@ mkdir -p output
                 // it will create a classifier.xml file
                 TrainTheModel(org_folder,gt_folder, model_name);
         }
-
+        else if (mode =="evalF")
+        {
+        char* outFolder =  argv[2];
+        char* gtFolder =  argv[3];
+        char* resultFileName = argv[4];
+        evaluateOutput(outFolder,gtFolder, resultFileName);
+        }
 ```
 ### functionmain.cpp (GMM Train and test)
 
