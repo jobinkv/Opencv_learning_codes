@@ -95,6 +95,7 @@ mkdir -p output
 ```
 [Return to main menu](#table-of-contents)
 ### GMM training 
+[code TrainGmmGbrModel](functionMain.cpp#L2129-L2198)
 
 ``` c++
 void TrainGmmGbrModel(string org_folder,string gt_folder,string model)// dealing wi th afolder
