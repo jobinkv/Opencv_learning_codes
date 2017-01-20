@@ -84,13 +84,33 @@ mkdir -p output
                 // it will create a classifier.xml file
                 TrainTheModel(org_folder,gt_folder, model_name);
         }
-        else if (mode =="evalF")
+        if (mode =="testF")
         {
-        char* outFolder =  argv[2];
-        char* gtFolder =  argv[3];
-        char* resultFileName = argv[4];
-        evaluateOutput(outFolder,gtFolder, resultFileName);
+                char* model_readed =  argv[4];
+                cout<<"tesing started"<<endl;
+                // reading all files in the folder
+                vector<string> files = vector<string>();
+                getdir(argv[2],files);
+
+                string model_file   = "/users/jobinkv/installs/caffe_cpp/googleNet/deploy.prototxt";
+                string trained_file = "/users/jobinkv/installs/caffe_cpp/googleNet/bvlc_reference_caffenet.caffemodel";
+                string mean_file    = "/users/jobinkv/installs/caffe_cpp/googleNet/imagenet_mean.binaryproto";
+                string label_file   = "/users/jobinkv/installs/caffe_cpp/googleNet/synset_words.txt";
+                Classifier deepFt(model_file, trained_file, mean_file, label_file);
+
+                for (unsigned int i = 0;i < files.size();i++)
+                {
+                        string inputPath =  argv[2] + string("/") + files[i] ;
+                        string outputPath =  argv[3] + string("/") + files[i] ;
+                        cout<<"Now running "<<files[i]<<endl;
+                        Mat image = imread(inputPath, CV_LOAD_IMAGE_COLOR);
+                        Mat layout = docLayotSeg(image, model_readed,deepFt);//char *model_readed
+                        imwrite(outputPath,layout);
+
+                }
+
         }
+
 
 ```
 [Return to main menu](#table-of-contents)
