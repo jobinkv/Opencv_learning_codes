@@ -8,6 +8,8 @@
 * **[GMM testing](#gmm-testing)**
 * **[SVM training](#svm-training)**
 * **[SVM testing](#svm-testing)**
+* **[Common feature extraction function for training](#common-feature-extraction-function-for-training)**
+
 
 
 ## Shell script
@@ -127,5 +129,9 @@ code [TrainTheModel](functionMain.cpp#L1296-L1433)
 ### SVM testing
 code [docLayotSeg](functionMain.cpp#L1525-L1546)
 code [crtTestFet](functionMain.cpp#L1436-L1522)
+
+### Common feature extraction function for training
+code [crtTrainFetGabur](functionMain.cpp#L2202-L2294)
+
 
 [Return to main menu](#table-of-contents)
